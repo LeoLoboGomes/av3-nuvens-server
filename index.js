@@ -57,7 +57,6 @@ app.post('/produtos', bodyParser.json(), async (req, res) => {
 });
 
 app.put('/produtos', bodyParser.json(), async (req, res) => {
-  console.log(req.body);
   const productId = parseInt(req.body.id);
   const productName = req.body.name;
   const productPrice = parseFloat(req.body.price);
@@ -67,10 +66,8 @@ app.put('/produtos', bodyParser.json(), async (req, res) => {
     .update({ name: productName, price: productPrice })
     .eq('id', productId);
 
-  console.log(response);
-
   if (response.status == 204) {
-    res.status(204).send({ message: "Produto Atualizado!" });
+    res.status(200).send({ message: "Produto Atualizado!" });
   }
   else {
     res.status(500).send({ error: "Algo deu errado" });
